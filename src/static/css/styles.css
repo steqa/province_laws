@@ -1,0 +1,64 @@
+p {
+    font-size: 0.9rem;
+}
+
+.nl {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: 0.8rem;
+    font-weight: var(--bs-nav-link-font-weight);
+    color: var(--bs-tertiary-color) !important;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.nl.active {
+    color: var(--bs-white-rgb) !important;
+    background-color: var(--bs-nav-tabs-link-active-bg);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+}
+
+/* Для WebKit (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+    width: 0.2dvw; /* ширина скроллбара */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: var(--bs-dark); /* цвет фона трека */
+    /* border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color); */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #888; /* цвет ползунка */
+    border-radius: 6px; /* скругление углов ползунка */
+  }
+  
+  /* Для Firefox */
+  ::-moz-scrollbar {
+    width: 0.2dvw;
+  }
+  
+  ::-moz-scrollbar-track {
+    background-color: var(--bs-dark);
+  }
+  
+  ::-moz-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+  }
+  
+  /* Для Edge и IE */
+  ::-ms-scrollbar {
+    width: 0.2dvw;
+  }
+  
+  ::-ms-scrollbar-track {
+    background-color: var(--bs-dark);
+  }
+  
+  ::-ms-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+  }
