@@ -14,6 +14,10 @@ p {
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
+.nl:hover {
+  color: white !important;
+}
+
 .nl.active {
     color: var(--bs-white-rgb) !important;
     background-color: var(--bs-nav-tabs-link-active-bg);
@@ -22,43 +26,65 @@ p {
 
 /* Для WebKit (Chrome, Safari, Opera) */
 ::-webkit-scrollbar {
-    width: 0.2dvw; /* ширина скроллбара */
-  }
+  width: 0.2dvw; /* ширина скроллбара */
+}
   
-  ::-webkit-scrollbar-track {
-    background-color: var(--bs-dark); /* цвет фона трека */
-    /* border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color); */
-  }
+::-webkit-scrollbar-track {
+  background-color: var(--bs-dark); /* цвет фона трека */
+}
   
-  ::-webkit-scrollbar-thumb {
-    background-color: #888; /* цвет ползунка */
-    border-radius: 6px; /* скругление углов ползунка */
-  }
-  
-  /* Для Firefox */
-  ::-moz-scrollbar {
-    width: 0.2dvw;
-  }
-  
-  ::-moz-scrollbar-track {
-    background-color: var(--bs-dark);
-  }
-  
-  ::-moz-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 6px;
-  }
-  
-  /* Для Edge и IE */
-  ::-ms-scrollbar {
-    width: 0.2dvw;
-  }
-  
-  ::-ms-scrollbar-track {
-    background-color: var(--bs-dark);
-  }
-  
-  ::-ms-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 6px;
-  }
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* цвет ползунка */
+  border-radius: 6px; /* скругление углов ползунка */
+}
+
+/* Для Firefox */
+::-moz-scrollbar {
+  width: 0.2dvw;
+}
+
+::-moz-scrollbar-track {
+  background-color: var(--bs-dark);
+}
+
+::-moz-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+}
+
+/* Для Edge и IE */
+::-ms-scrollbar {
+  width: 0.2dvw;
+}
+
+::-ms-scrollbar-track {
+  background-color: var(--bs-dark);
+}
+
+::-ms-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+}
+
+.copied-text {
+  padding: 1px;
+  border-radius: var(--bs-border-radius);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.copied-text:hover {
+  --bs-text-opacity: 1;
+  background-color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+  color: white;
+  cursor: pointer;
+}
+
+#copyText {
+  --bs-bg-opacity: 1;
+  position: absolute;
+  background-color: rgba(var(--bs-tertiary-bg-rgb),var(--bs-bg-opacity));
+  padding: 5px;
+  border-radius: var(--bs-border-radius);
+  display: none;
+  z-index: 1000;
+}

@@ -1,8 +1,16 @@
 {% extends 'laws/base.html' %}
+{% load static %}
 
 {% block title %}КоАП{% endblock %}
 
 {% block content %}
+
+<script src="{% static 'js/copy-text.js' %}" defer></script>
+
+<div id="copyText">
+    <i class="bi bi-clipboard2" id="copyTextIcon"></i>
+    <i class="bi bi-clipboard2-check-fill" id="copiedTextIcon" style="display: none;"></i>
+</div>
 
 <div>
     <div class="row gx-0">
@@ -30,7 +38,7 @@
                     <p class="text-primary-emphasis fw-semibold text-uppercase my-0">
                         Статья {{ chapter.number }}.{{ item.number|stringformat:"g" }}.    
                     </p>
-                    <p class="text-secondary-emphasis my-0">
+                    <p class="text-secondary-emphasis my-0 copied-text-container">
                         {{ item.text|linebreaksbr }}
                     </p>
                     <span class="text-white">
@@ -51,7 +59,7 @@
                         </button>
                         <div class="collapse" id="item{{ chapter.number }}{{ item.number|stringformat:'d' }}">
                             <div class="card card-body text-secondary-emphasis mt-2">
-                                <p class="my-0">{{ item.addition|linebreaksbr }}</p>
+                                <p class="my-0 copied-text-container">{{ item.addition|linebreaksbr }}</p>
                             </div>
                         </div>
                         {% endif %}
