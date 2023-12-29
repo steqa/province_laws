@@ -44,7 +44,7 @@ class AdministrativeOffencesCode(models.Model):
     )
     penalty = models.CharField(
         verbose_name='сумма штрафа',
-        max_length=20,
+        max_length=300,
         null=True, blank=True
     )
     conjunction_2 = models.CharField(
@@ -55,7 +55,7 @@ class AdministrativeOffencesCode(models.Model):
     )
     deprivation_driver_license = models.CharField(
         verbose_name='срок лишение ВУ',
-        max_length=41,
+        max_length=300,
         null=True, blank=True
     )
     conjunction_3 = models.CharField(
@@ -66,7 +66,81 @@ class AdministrativeOffencesCode(models.Model):
     )
     arrest = models.CharField(
         verbose_name='срок ареста',
-        max_length=20,
+        max_length=300,
+        null=True, blank=True
+    )
+    addition = models.TextField(
+        verbose_name='дополнение',
+        null=True, blank=True
+    )
+    created_at = models.DateTimeField(
+        verbose_name='дата создания',
+        auto_now_add=True
+    )
+    updated_at = models.DateTimeField(
+        verbose_name='дата последнего обновления',
+        auto_now=True
+    )
+    
+    def __str__(self) -> str:
+        return str(self.number)
+
+
+class CriminalCodeChapter(models.Model):
+    number = models.SmallIntegerField(verbose_name='номер главы')
+    name = models.TextField(verbose_name='название')
+    created_at = models.DateTimeField(
+        verbose_name='дата создания',
+        auto_now_add=True
+    )
+    updated_at = models.DateTimeField(
+        verbose_name='дата последнего обновления',
+        auto_now=True
+    )
+    
+    def __str__(self) -> str:
+        return str(self.number)
+
+
+class CriminalCode(models.Model):
+    CONJUNCTIONS = [
+        ('OR', 'или'),
+        ('AND', 'и'),
+    ]
+    
+    chapter = models.ForeignKey(
+        to=CriminalCodeChapter,
+        verbose_name='глава',
+        related_name='chapter',
+        on_delete=models.SET_NULL,
+        null=True, blank=True
+    )
+    number = models.FloatField(verbose_name='номер статьи')
+    text = models.TextField(verbose_name='текст')
+    penalty = models.CharField(
+        verbose_name='сумма штрафа',
+        max_length=300,
+        null=True, blank=True
+    )
+    conjunction = models.CharField(
+        verbose_name='союз',
+        max_length=3,
+        choices=CONJUNCTIONS,
+        null=True, blank=True
+    )
+    compensation = models.BooleanField(
+        verbose_name='возмещение ущерба',
+        null=True, blank=True
+    )
+    conjunction_2 = models.CharField(
+        verbose_name='союз',
+        max_length=3,
+        choices=CONJUNCTIONS,
+        null=True, blank=True
+    )
+    arrest = models.CharField(
+        verbose_name='срок ареста',
+        max_length=300,
         null=True, blank=True
     )
     addition = models.TextField(

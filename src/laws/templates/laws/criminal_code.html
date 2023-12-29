@@ -1,9 +1,9 @@
 {% extends 'laws/base.html' %}
 {% load static %}
 
-{% block active1 %}active{% endblock %}
+{% block active2 %}active{% endblock %}
 
-{% block title %}КоАП{% endblock %}
+{% block title %}УК{% endblock %}
 
 {% block content %}
 
@@ -45,13 +45,11 @@
                     </p>
                     <span class="text-white">
                         <p class="my-0">
-                            <span>{% if item.notification %}Предупреждение {% endif %}</span>
-                            <span class="text-secondary-emphasis">{% if item.conjunction_1 %}{{ item.get_conjunction_1_display }} {% endif %}</span>
                             <span>{% if item.penalty %}Штраф {{ item.penalty }} рублей{% endif %}</span>
+                            <span class="text-secondary-emphasis">{% if item.conjunction %}{{ item.get_conjunction_display }} {% endif %}</span>
+                            <span>{% if item.compensation %}Возмещение ущерба {% endif %}</span>
                             <span class="text-secondary-emphasis">{% if item.conjunction_2 %}{{ item.get_conjunction_2_display }} {% endif %}</span>
-                            <span>{% if item.deprivation_driver_license %}Лишение права на управление транспортным средством {{ item.deprivation_driver_license }} {% endif %}</span>
-                            <span class="text-secondary-emphasis">{% if item.conjunction_3 %}{{ item.get_conjunction_3_display }} {% endif %}</span>
-                            <span>{% if item.arrest %}Административный арест {{ item.arrest }} суток{% endif %}</span>
+                            <span>{% if item.arrest %}Арест сроком {{ item.arrest }}{% endif %}</span>
                         </p>
                         {% if item.addition %}
                         <button class="btn btn-outline-secondary btn-sm mt-1"

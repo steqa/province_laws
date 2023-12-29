@@ -1,22 +1,30 @@
 function splitTextIntoChunks(text, chunkSize) {
-    const words = text.split(' ');
     const chunks = [];
-    let currentChunk = '';
+    const lines = text.split('\n')
+    // console.log(lines)
 
-    for (let i = 0; i < words.length; i++) {
-        const word = words[i];
-        const potentialChunk = `${currentChunk}${word} `;
+    for (let i = 0; i < lines.length; i++) {
+        const words = lines[i].split(' ');
+        let currentChunk = '';
+    
+        words.forEach(word => {
+            const potentialChunk = `${currentChunk}${word} `;
         
-        if (potentialChunk.length <= chunkSize) {
-            currentChunk = potentialChunk;
-        } else {
-            chunks.push(currentChunk);
-            currentChunk = `${word} `;
+            if (potentialChunk.length <= chunkSize) {
+                currentChunk = potentialChunk;
+            } else {
+                chunks.push(currentChunk.trim());
+                currentChunk = `${word} `;
+            }
+        });
+    
+        if (currentChunk.length > 0) {
+            chunks.push(currentChunk.trim());
         }
-    }
 
-    if (currentChunk.length > 0) {
-        chunks.push(currentChunk.trim());
+        if (lines[i+1]) {
+            chunks.push('<br>')
+        }
     }
 
     return chunks;
@@ -35,10 +43,15 @@ function highlightText() {
         textContainer.innerHTML = '';
     
         chunks.forEach(chunk => {
-            const span = document.createElement('span');
-            span.textContent = chunk;
-            span.classList.add('copied-text')
-            textContainer.appendChild(span);
+            if (chunk === '<br>') {
+                const br = document.createElement('br');
+                textContainer.appendChild(br);
+            } else {
+                const span = document.createElement('span');
+                span.textContent = chunk;
+                span.classList.add('copied-text')
+                textContainer.appendChild(span);
+            }
         });
     });
 

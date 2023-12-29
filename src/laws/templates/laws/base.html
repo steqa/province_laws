@@ -25,28 +25,28 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">КоАП</a>
+                        <a class="nav-link {% block active1 %}{% endblock %}" aria-current="page" href="{% url 'administrative_offences_code' %}">КоАП</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">УК</a>
+                        <a class="nav-link {% block active2 %}{% endblock %}" href="{% url 'criminal_code' %}">УК</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ПДД</a>
+                        <a class="nav-link {% block active3 %}{% endblock %}" href="#">ПДД</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Процессуальный Кодекс</a>
+                        <a class="nav-link {% block active4 %}{% endblock %}" href="#">Процессуальный Кодекс</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Устав ГИБДД</a>
+                        <a class="nav-link {% block active5 %}{% endblock %}" href="#">Устав ГИБДД</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Устав ГУВД</a>
+                        <a class="nav-link {% block active6 %}{% endblock %}" href="#">Устав ГУВД</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ПдГС</a>
+                        <a class="nav-link {% block active7 %}{% endblock %}" href="#">ПдГС</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Границы городов</a>
+                        <a class="nav-link {% block active8 %}{% endblock %}" href="#">Границы городов</a>
                     </li>
                 </ul>
             </div>
