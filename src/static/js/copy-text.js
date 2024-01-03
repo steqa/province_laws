@@ -1,8 +1,6 @@
 function splitTextIntoChunks(text, chunkSize) {
     const chunks = [];
     const lines = text.split('\n')
-    // console.log(lines)
-
     for (let i = 0; i < lines.length; i++) {
         const words = lines[i].split(' ');
         let currentChunk = '';

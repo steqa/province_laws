@@ -1,0 +1,25 @@
+{% extends 'laws/base.html' %}
+{% load static %}
+
+{% block active1 %}active{% endblock %}
+
+{% block content %}
+
+<script src="{% static 'js/copy-text.js' %}" defer></script>
+<script src="{% static 'js/leftbar-scroll.js' %}" defer></script>
+
+<div id="copyText">
+    <i class="bi bi-clipboard2" id="copyTextIcon"></i>
+    <i class="bi bi-clipboard2-check-fill" id="copiedTextIcon" style="display: none;"></i>
+</div>
+
+<div class="pages">
+    <div id="AdministrativeOffencesCode" style="display: none;">
+        {% include 'laws/administrative_offences_code.html' with chapters=administrative_offences_code %}
+    </div>
+    <div id="CriminalCode" style="display: none;">
+        {% include 'laws/criminal_code.html' with chapters=criminal_code %}
+    </div>
+</div>
+
+{% endblock %}

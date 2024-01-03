@@ -1,78 +1,51 @@
-{% extends 'laws/base.html' %}
-{% load static %}
-
-{% block active1 %}active{% endblock %}
-
-{% block title %}КоАП{% endblock %}
-
-{% block content %}
-
-<script src="{% static 'js/copy-text.js' %}" defer></script>
-
-<div id="copyText">
-    <i class="bi bi-clipboard2" id="copyTextIcon"></i>
-    <i class="bi bi-clipboard2-check-fill" id="copiedTextIcon" style="display: none;"></i>
-</div>
-
-<div>
-    <div class="row gx-0">
-        <div class="col-4 border-end py-4 px-3" style="position: fixed; height: calc(100dvh - 56.8px); overflow: auto;">
-            <nav id="scrollbar" class="">
-                <nav class="nav nav-pills flex-column">
-                    {% for chapter in chapters %}
-                    <a class="nav-link nl px-2 py-1" href="#chapter{{ chapter.number }}">Глава {{ chapter.number }}. {{ chapter.name }}</a>
-                    {% endfor %}
-                </nav>
-            </nav>
-        </div>
-
-        <div class="col-4"></div>
-      
-        <div class="col-8 my-4 px-5">
-            <div data-bs-spy="scroll" data-bs-target="#scrollbar" data-bs-smooth-scroll="true">
-
-                {% for chapter in chapters %}
-                <h5 class="my-3 text-primary-emphasis text-center" id="chapter{{ chapter.number }}">
-                    Глава {{ chapter.number }}. {{ chapter.name }}
-                </h5>
-                {% for item in chapter.chapter.all|dictsort:"number" %}
-                <div class="my-4" style="text-align: justify;">
-                    <p class="text-primary-emphasis fw-semibold text-uppercase my-0">
-                        Статья {{ chapter.number }}.{{ item.number|stringformat:"g" }}.    
+<div class="row gx-0">
+    <div class="col-4 border-end py-4 px-3" style="position: fixed; height: calc(100dvh - 56.8px); overflow: auto;">
+        <nav class="nav nav-pills flex-column">
+            {% for chapter in chapters %}
+            <a class="nav-link nl px-2 py-1" href="#AdministrativeOffencesCode{{ chapter.number }}">Глава {{ chapter.number }}. {{ chapter.name }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+    <div class="col-4"></div>
+  
+    <div class="col-8 my-4 px-5">
+        {% for chapter in chapters %}
+        <div class="chapter">
+            <h5 class="my-3 text-primary-emphasis text-center" id="AdministrativeOffencesCode{{ chapter.number }}">
+                Глава {{ chapter.number }}. {{ chapter.name }}
+            </h5>
+            {% for item in chapter.chapter.all|dictsort:"number" %}
+            <div class="my-4" style="text-align: justify;">
+                <p class="text-primary-emphasis fw-semibold text-uppercase my-0">
+                    Статья {{ chapter.number }}.{{ item.number|stringformat:"g" }}.    
+                </p>
+                <p class="text-secondary-emphasis my-0 copied-text-container">{{ item.text }}</p>
+                <span class="text-white">
+                    <p class="my-0">
+                        <span>{% if item.notification %}Предупреждение {% endif %}</span>
+                        <span class="text-secondary-emphasis">{% if item.conjunction_1 %}{{ item.get_conjunction_1_display }} {% endif %}</span>
+                        <span>{% if item.penalty %}Штраф {{ item.penalty }} рублей{% endif %}</span>
+                        <span class="text-secondary-emphasis">{% if item.conjunction_2 %}{{ item.get_conjunction_2_display }} {% endif %}</span>
+                        <span>{% if item.deprivation_driver_license %}Лишение права на управление транспортным средством {{ item.deprivation_driver_license }} {% endif %}</span>
+                        <span class="text-secondary-emphasis">{% if item.conjunction_3 %}{{ item.get_conjunction_3_display }} {% endif %}</span>
+                        <span>{% if item.arrest %}Административный арест {{ item.arrest }} суток{% endif %}</span>
                     </p>
-                    <p class="text-secondary-emphasis my-0 copied-text-container">
-                        {{ item.text }}
-                    </p>
-                    <span class="text-white">
-                        <p class="my-0">
-                            <span>{% if item.notification %}Предупреждение {% endif %}</span>
-                            <span class="text-secondary-emphasis">{% if item.conjunction_1 %}{{ item.get_conjunction_1_display }} {% endif %}</span>
-                            <span>{% if item.penalty %}Штраф {{ item.penalty }} рублей{% endif %}</span>
-                            <span class="text-secondary-emphasis">{% if item.conjunction_2 %}{{ item.get_conjunction_2_display }} {% endif %}</span>
-                            <span>{% if item.deprivation_driver_license %}Лишение права на управление транспортным средством {{ item.deprivation_driver_license }} {% endif %}</span>
-                            <span class="text-secondary-emphasis">{% if item.conjunction_3 %}{{ item.get_conjunction_3_display }} {% endif %}</span>
-                            <span>{% if item.arrest %}Административный арест {{ item.arrest }} суток{% endif %}</span>
-                        </p>
-                        {% if item.addition %}
-                        <button class="btn btn-outline-secondary btn-sm mt-1"
-                                type="button" data-bs-toggle="collapse"
-                                data-bs-target="#item{{ chapter.number }}{{ item.number|stringformat:'d' }}">
-                            Дополнение
-                        </button>
-                        <div class="collapse" id="item{{ chapter.number }}{{ item.number|stringformat:'d' }}">
-                            <div class="card card-body text-secondary-emphasis mt-2">
-                                <p class="my-0 copied-text-container">{{ item.addition }}</p>
-                            </div>
+                    {% if item.addition %}
+                    <button class="btn btn-outline-secondary btn-sm mt-1"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#AdministrativeOffencesCode{{ chapter.number }}-{{ item.number|stringformat:'d' }}">
+                        Дополнение
+                    </button>
+                    <div class="collapse" id="AdministrativeOffencesCode{{ chapter.number }}-{{ item.number|stringformat:'d' }}">
+                        <div class="card card-body text-secondary-emphasis mt-2">
+                            <p class="my-0 copied-text-container">{{ item.addition }}</p>
                         </div>
-                        {% endif %}
-                    </span>
-                </div>
-                {% endfor %}
-                {% endfor %}
-
+                    </div>
+                    {% endif %}
+                </span>
             </div>
+            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 </div>
-
-{% endblock %}
