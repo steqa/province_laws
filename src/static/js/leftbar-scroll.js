@@ -1,5 +1,5 @@
 const navigationsBtns = document.querySelectorAll('.nl');
-const chapters = document.querySelectorAll('.chapter');
+const chapters = document.querySelectorAll('.RightItem');
 
 navigationsBtns.forEach(btn => {
     btn.addEventListener('click', (event) => {
@@ -18,7 +18,7 @@ function scrollToElement(btn) {
     const elementPosition = element.getBoundingClientRect().top;
     window.scrollTo({
         top: window.pageYOffset + elementPosition - offset,
-        behavior: 'instant'
+        behavior: 'smooth'
     });
 }
 
@@ -31,11 +31,11 @@ function goToFirstElement() {
 
 window.addEventListener('scroll', (event) => {
     let visibleChapters = [];
-    
+
     chapters.forEach(element => {
         let displayCheck = false;
         let parentElement = element.parentElement;
-      
+
         while (parentElement) {
             const display = window.getComputedStyle(parentElement).getPropertyValue('display');
             if (display === 'none') {
@@ -44,7 +44,7 @@ window.addEventListener('scroll', (event) => {
             }
             parentElement = parentElement.parentElement;
         }
-      
+
         if (!displayCheck) {
             visibleChapters.push(element);
         }
@@ -66,9 +66,7 @@ window.addEventListener('scroll', (event) => {
     if (upperChapters.length === 0) {
         title = visibleChapters[0].querySelector('h5');
     } else {
-        title = visibleChapters[upperChapters[upperChapters.length-1]+1].querySelector('h5');
+        title = visibleChapters[upperChapters[upperChapters.length - 1] + 1].querySelector('h5');
     }
     document.querySelector(`a[href="#${title.id}"]`).classList.add('active');
 });
-
-document.addEventListener('DOMContentLoaded', goToFirstElement);

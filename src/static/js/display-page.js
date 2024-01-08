@@ -1,5 +1,6 @@
 const title = document.querySelector('title');
 const pageBtns = document.querySelectorAll('.pageBtn');
+const loadSpinner = document.getElementById('loadSpinner');
 
 const AdministrativeOffencesCode = document.getElementById('AdministrativeOffencesCode');
 const CriminalCode = document.getElementById('CriminalCode');
@@ -17,6 +18,7 @@ function handler(btn) {
 }
 
 function updatePage(page) {
+    loadSpinner.style.display = 'none';
     if (page === 'AdministrativeOffencesCode') {
         title.innerText = 'КоАП';
         AdministrativeOffencesCode.style.display = 'block';
@@ -26,7 +28,8 @@ function updatePage(page) {
         AdministrativeOffencesCode.style.display = 'none';
         CriminalCode.style.display = 'block';
     }
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
     goToFirstElement();
 }
-
-document.addEventListener('DOMContentLoaded', updatePage(page));

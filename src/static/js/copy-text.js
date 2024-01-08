@@ -4,10 +4,10 @@ function splitTextIntoChunks(text, chunkSize) {
     for (let i = 0; i < lines.length; i++) {
         const words = lines[i].split(' ');
         let currentChunk = '';
-    
+
         words.forEach(word => {
             const potentialChunk = `${currentChunk}${word} `;
-        
+
             if (potentialChunk.length <= chunkSize) {
                 currentChunk = potentialChunk;
             } else {
@@ -15,12 +15,12 @@ function splitTextIntoChunks(text, chunkSize) {
                 currentChunk = `${word} `;
             }
         });
-    
+
         if (currentChunk.length > 0) {
             chunks.push(currentChunk.trim());
         }
 
-        if (lines[i+1]) {
+        if (lines[i + 1]) {
             chunks.push('<br>')
         }
     }
@@ -37,9 +37,9 @@ function highlightText() {
     textContainers.forEach(textContainer => {
         const text = textContainer.innerText;
         const chunks = splitTextIntoChunks(text, 132);
-    
+
         textContainer.innerHTML = '';
-    
+
         chunks.forEach(chunk => {
             if (chunk === '<br>') {
                 const br = document.createElement('br');
@@ -54,23 +54,23 @@ function highlightText() {
     });
 
     const spans = document.querySelectorAll('.copied-text');
-    
+
     spans.forEach(span => {
         span.addEventListener('mouseover', (event) => {
             copyTextIndicator.style.display = 'block';
             updateCopyTextIndicatorPosition(event);
         });
-    
+
         span.addEventListener('mouseleave', () => {
             copyTextIndicator.style.display = 'none';
             copyTextIcon.style.display = 'block';
             copiedTextIcon.style.display = 'none';
         });
-        
+
         span.addEventListener('mousemove', (event) => {
             updateCopyTextIndicatorPosition(event);
         });
-        
+
         span.addEventListener('click', () => {
             const textToCopy = span.textContent;
             navigator.clipboard.writeText(textToCopy)
@@ -90,4 +90,4 @@ function updateCopyTextIndicatorPosition(event) {
     copyTextIndicator.style.left = `${event.clientX + window.scrollX + 20}px`;
 }
 
-document.addEventListener('DOMContentLoaded', highlightText);
+highlightText();

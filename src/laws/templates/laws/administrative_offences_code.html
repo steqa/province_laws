@@ -1,51 +1,61 @@
 <div class="row gx-0">
     <div class="col-4 border-end py-4 px-3" style="position: fixed; height: calc(100dvh - 56.8px); overflow: auto;">
-        <nav class="nav nav-pills flex-column">
-            {% for chapter in chapters %}
-            <a class="nav-link nl px-2 py-1" href="#AdministrativeOffencesCode{{ chapter.number }}">Глава {{ chapter.number }}. {{ chapter.name }}</a>
-            {% endfor %}
+        <nav class="nav nav-pills flex-column AdministrativeOffencesCodeLeftBarItems">
+            <a class="nav-link nl px-2 py-1 visually-hidden" href="#AdministrativeOffencesCode$ChapterNumber$">
+                Глава $ChapterNumber$. $ChapterName$
+            </a>
         </nav>
     </div>
     <div class="col-4"></div>
-  
-    <div class="col-8 my-4 px-5">
-        {% for chapter in chapters %}
-        <div class="chapter">
-            <h5 class="my-3 text-primary-emphasis text-center" id="AdministrativeOffencesCode{{ chapter.number }}">
-                Глава {{ chapter.number }}. {{ chapter.name }}
+    <div class="col-8 my-4 px-5" id="AdministrativeOffencesCodeDiv">
+        <div class="AdministrativeOffencesCodeChapter visually-hidden">
+            <h5 class="my-3 text-primary-emphasis text-center" id="AdministrativeOffencesCode$ChapterNumber$">
+                Глава $ChapterNumber$. $ChapterName$
             </h5>
-            {% for item in chapter.chapter.all|dictsort:"number" %}
-            <div class="my-4" style="text-align: justify;">
+        </div>
+        <div class="AdministrativeOffencesCodeOffence visually-hidden">
+            <div class="my-4">
                 <p class="text-primary-emphasis fw-semibold text-uppercase my-0">
-                    Статья {{ chapter.number }}.{{ item.number|stringformat:"g" }}.    
+                    Статья $OffenceChapter$.$OffenceNumber$.
                 </p>
-                <p class="text-secondary-emphasis my-0 copied-text-container">{{ item.text }}</p>
+                <p class="text-secondary-emphasis my-0 copied-text-container">$OffenceText$</p>
                 <span class="text-white">
                     <p class="my-0">
-                        <span>{% if item.notification %}Предупреждение {% endif %}</span>
-                        <span class="text-secondary-emphasis">{% if item.conjunction_1 %}{{ item.get_conjunction_1_display }} {% endif %}</span>
-                        <span>{% if item.penalty %}Штраф {{ item.penalty }} рублей{% endif %}</span>
-                        <span class="text-secondary-emphasis">{% if item.conjunction_2 %}{{ item.get_conjunction_2_display }} {% endif %}</span>
-                        <span>{% if item.deprivation_driver_license %}Лишение права на управление транспортным средством {{ item.deprivation_driver_license }} {% endif %}</span>
-                        <span class="text-secondary-emphasis">{% if item.conjunction_3 %}{{ item.get_conjunction_3_display }} {% endif %}</span>
-                        <span>{% if item.arrest %}Административный арест {{ item.arrest }} суток{% endif %}</span>
+                        <span class="OffenceNotification visually-hidden">
+                            Предупреждение
+                        </span>
+                        <span class="text-secondary-emphasis OffenceConjunction1 visually-hidden">
+                            $OffenceConjunction1$
+                        </span>
+                        <span class="OffencePenalty visually-hidden">
+                            Штраф $OffencePenalty$ рублей
+                        </span>
+                        <span class="text-secondary-emphasis OffenceConjunction2 visually-hidden">
+                            $OffenceConjunction2$
+                        </span>
+                        <span class="OffenceDeprivationDriverLicense visually-hidden">
+                            Лишение права на управление транспортным средством $OffenceDeprivationDriverLicense$
+                        </span>
+                        <span class="text-secondary-emphasis OffenceConjunction3 visually-hidden">
+                            $OffenceConjunction3$
+                        </span>
+                        <span class="OffenceArrest visually-hidden">
+                            Административный арест $OffenceArrest$ суток
+                        </span>
                     </p>
-                    {% if item.addition %}
-                    <button class="btn btn-outline-secondary btn-sm mt-1"
-                            type="button" data-bs-toggle="collapse"
-                            data-bs-target="#AdministrativeOffencesCode{{ chapter.number }}-{{ item.number|stringformat:'d' }}">
-                        Дополнение
-                    </button>
-                    <div class="collapse" id="AdministrativeOffencesCode{{ chapter.number }}-{{ item.number|stringformat:'d' }}">
-                        <div class="card card-body text-secondary-emphasis mt-2">
-                            <p class="my-0 copied-text-container">{{ item.addition }}</p>
+                    <div class="OffenceAddition visually-hidden">
+                        <button class="btn btn-outline-secondary btn-sm mt-1" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#$OffenceAdditionID$">
+                            Дополнение
+                        </button>
+                        <div class="collapse" id="$OffenceAdditionID$">
+                            <div class="card card-body text-secondary-emphasis mt-2">
+                                <p class="my-0 copied-text-container">$OffenceAddition$</p>
+                            </div>
                         </div>
                     </div>
-                    {% endif %}
                 </span>
             </div>
-            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>

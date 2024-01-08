@@ -5,19 +5,24 @@
 
 {% block content %}
 
-<script src="{% static 'js/copy-text.js' %}" defer></script>
-<script src="{% static 'js/leftbar-scroll.js' %}" defer></script>
+<script src="{% static 'js/get-data.js' %}" defer></script>
+<span class="after-load visually-hidden" data-src="{% static 'js/leftbar-scroll.js' %}"></span>
+<span class="after-load visually-hidden" data-src="{% static 'js/display-page.js' %}"></span>
+<span class="after-load visually-hidden" data-src="{% static 'js/copy-text.js' %}"></span>
 
 <div id="copyText">
     <i class="bi bi-clipboard2" id="copyTextIcon"></i>
     <i class="bi bi-clipboard2-check-fill" id="copiedTextIcon" style="display: none;"></i>
 </div>
 
+<div class="spinner-border" role="status" id="loadSpinner" style="position: fixed; top: 50%; left: 50%;"></div>
+
 <div class="pages">
-    <div id="AdministrativeOffencesCode" style="display: none;">
+    <div id="AdministrativeOffencesCode" style="display: none;"
+        data-get-link="{% url 'get_administrative_offences_code' %}">
         {% include 'laws/administrative_offences_code.html' with chapters=administrative_offences_code %}
     </div>
-    <div id="CriminalCode" style="display: none;">
+    <div id="CriminalCode" style="display: none;" data-get-link="{% url 'get_criminal_code' %}">
         {% include 'laws/criminal_code.html' with chapters=criminal_code %}
     </div>
 </div>
